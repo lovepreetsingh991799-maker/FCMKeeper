@@ -30,14 +30,27 @@ class InboxFlowTest {
     @Test fun systemNotificationIntentReturnsToInboxWithoutReadingItem() {
         compose.onNodeWithText("Test delivery").performClick()
         app.repository.insert(InboxNotification("unread", "Second delivery", "Still unread", null, System.currentTimeMillis()))
-        compose.activityRule.scenario.onActivity {
-            it.startActivity(Intent(it, MainActivity::class.java).setAction(NotificationPublisher.OPEN_INBOX)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        val activity = compose.activity
+        val launchIntent = Intent(activity.intent)
+        val instrumentation = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
+        try {
+            instrumentation.runOnMainSync {
+                activity.startActivity(Intent(activity, MainActivity::class.java).setAction(NotificationPublisher.OPEN_INBOX)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            }
+            compose.waitUntil(10_000) {
+                compose.onAllNodesWithText("Your inbox").fetchSemanticsNodes().isNotEmpty()
+            }
+            compose.onNodeWithText("Your inbox").assertIsDisplayed()
+            assertFalse(app.repository.items.value.first { it.id == "unread" }.isRead)
+        } finally {
+            // ActivityScenario matches lifecycle callbacks by the original launch intent.
+            // The real onNewIntent legitimately replaces it; restore it only for test teardown.
+            instrumentation.runOnMainSync { activity.intent = launchIntent }
         }
-        compose.onNodeWithText("Your inbox").assertIsDisplayed()
-        assertFalse(app.repository.items.value.first { it.id == "unread" }.isRead)
     }
     @Test fun deletionRequiresConfirmation() {
+        compose.onNodeWithText("Just now").assertIsDisplayed()
         compose.onNodeWithContentDescription("Delete Test delivery").performClick()
         compose.onNodeWithText("Cancel").performClick()
         assertEquals(1, app.repository.items.value.size)

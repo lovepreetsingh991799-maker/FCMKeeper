@@ -94,3 +94,4 @@ Manual acceptance checklist:
 ## Submission
 
 Source is in this folder. The build creates the installable APK at the path above. Connect your Firebase configuration before producing the final push-enabled APK. Publish the source to your chosen GitHub repository after reviewing tracked files; Firebase configuration, local SDK paths, build output and signing keys are excluded. No remote repository is created or published automatically.
+Execution results and remaining external checks are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).

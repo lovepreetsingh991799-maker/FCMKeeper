@@ -107,7 +107,7 @@ fun KeeperApp(model: InboxViewModel) {
         }
         val snackbar = remember { SnackbarHostState() }
         LaunchedEffect(model) { model.messages.collect { snackbar.showSnackbar(it) } }
-        LaunchedEffect(Unit) { while (true) { delay(60_000); now = System.currentTimeMillis() } }
+        LaunchedEffect(all) { now = System.currentTimeMillis(); while (true) { delay(60_000); now = System.currentTimeMillis() } }
         BackHandler(selectedId != null) { model.inbox() }
         val filter = InboxFilter.valueOf(filterName)
         val sort = InboxSort.valueOf(sortName)
