@@ -23,3 +23,5 @@ service-account*.json
 
 /.idea/
 /output/
+
+/.kotlin/

@@ -1,0 +1,13 @@
+{
+  "message": {
+    "token": "REPLACE_WITH_DEVICE_FCM_TOKEN",
+    "android": { "priority": "high" },
+    "data": {
+      "id": "notification_101",
+      "title": "New Notification",
+      "description": "This is a sample notification for the assignment.",
+      "bannerImg": "https://example.com/banner.jpg",
+      "timestamp": "1791873000000"
+    }
+  }
+}
