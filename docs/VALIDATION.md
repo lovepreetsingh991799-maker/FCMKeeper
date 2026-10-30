@@ -1,4 +1,4 @@
-# Validation record
+# Initial local-mode validation record
 
 Validated on 2026-10-30 with JDK 21, Gradle 9.3.1 and the Android 11 / API 30 Google Play emulator.
 
@@ -29,3 +29,15 @@ Visual review found and fixed a stale-clock issue on newly arrived notifications
 - The source has local Git commits. No GitHub remote has been created or published.
 
 The dedicated test emulator was shut down after validation. Its AVD remains available as `FCMKeeper_Test_API30` for future test runs. Build reports are available under `app/build/reports/`.
+## Firebase configuration follow-up
+
+The owner supplied the Firebase Android configuration. Its package name matches `com.example.fcmkeeper`. It was renamed to `app/google-services.json` and remains excluded from Git.
+
+- `processDebugGoogleServices`, `assembleDebug`, and all 6 unit tests passed with the real configuration.
+- The updated debug APK was installed on the owner's connected phone using an in-place update that preserves app data.
+- Firebase issued a non-empty FCM registration token, verified from the app's token persistence without exposing its value.
+- No real push was sent during this follow-up. Foreground/background message delivery still requires a sender-side test.
+- The earlier release APK and earlier APK checksum above refer to the initial local-mode build.
+
+Current Firebase-enabled debug APK SHA-256:
+`FD327EB27AAC5056268F91434B08F7FADAE3C71AFAEAD501A7073BC6E6437D82`
