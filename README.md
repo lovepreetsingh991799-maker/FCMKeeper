@@ -2,6 +2,35 @@
 
 A native Kotlin / Jetpack Compose notification inbox built for the Firebase Notification Inbox assignment. Uses standard Material icons, Android resources, Material 3 components and system fonts. No custom image assets are required.
 
+## App screenshots
+
+Screenshots captured on a physical Android device. The displayed messages are local test notifications; the settings screen shows the Firebase connection status.
+
+<table>
+  <tr>
+    <th>Inbox and filters</th>
+    <th>Inbox actions</th>
+  </tr>
+  <tr>
+    <td><img src="docs/media/screenshots/inbox.jpeg" alt="Notification inbox with search, read filter, sorting and saved messages" width="280" /></td>
+    <td><img src="docs/media/screenshots/inbox-actions.jpeg" alt="Inbox menu showing mark all as read and clear inbox actions" width="280" /></td>
+  </tr>
+  <tr>
+    <th>Notification details</th>
+    <th>Settings and Firebase connection</th>
+  </tr>
+  <tr>
+    <td><img src="docs/media/screenshots/notification-details.jpeg" alt="Notification details with banner placeholder, read state, timestamp and full description" width="280" /></td>
+    <td><img src="docs/media/screenshots/settings.jpeg" alt="Settings showing enabled alerts, Firebase connection and device token controls" width="280" /></td>
+  </tr>
+</table>
+
+## Workflow video
+
+[Open the app workflow video](docs/media/workflow.mp4) · MP4, approximately 10.8 MB.
+
+If GitHub does not display a video player, use the file page's download button to watch the recording locally.
+
 ## Features
 
 - FCM messages are saved in local SQLite before an Android system alert is posted.
